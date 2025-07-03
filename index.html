@@ -208,36 +208,5 @@
         <li>French (Advanced)</li>
         <li>Arabic (Native)</li>
     </ul>
-    
-    <div class="footer">
-        <p>Last updated: June 2024</p>
-    </div>
-
-    <script>
-        // Simple JavaScript to make the page interactive
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click event to contact info
-            const contactItems = document.querySelectorAll('.contact-info p');
-            contactItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    this.style.color = '#3498db';
-                    setTimeout(() => {
-                        this.style.color = '';
-                    }, 500);
-                });
-            });
-            
-            // Add hover effect to sections
-            const sections = document.querySelectorAll('h3');
-            sections.forEach(section => {
-                section.addEventListener('mouseover', function() {
-                    this.style.textDecoration = 'underline';
-                });
-                section.addEventListener('mouseout', function() {
-                    this.style.textDecoration = 'none';
-                });
-            });
-        });
-    </script>
 </body>
 </html>
