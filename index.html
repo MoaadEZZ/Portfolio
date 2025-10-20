@@ -1,239 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GSAP ScrollTrigger — Demo</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOAAD EZZAHIR - Computer Engineer</title>
+
+  <!-- ✅ GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
   <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#7c3aed;
-      --muted:#94a3b8;
-      color-scheme: dark;
+    /* 🌈 GLOBAL STYLES */
+    :root {
+      --main-color: #3498db;
+      --accent-color: #2c3e50;
+      --bg-light: #f9f9f9;
+      --text-color: #333;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#071025 0%, #071828 100%); color:#e6eef8}
-    header{position:fixed;left:0;right:0;top:0;z-index:40;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;backdrop-filter: blur(6px)}
-    .logo{font-weight:700;letter-spacing:-0.02em}
-    nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-weight:600}
 
-    .spacer{height:88px}
-    .container{width:min(1100px,94%);margin:0 auto}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      background: linear-gradient(120deg, #f0f4ff, #ffffff);
+      overflow-x: hidden;
+    }
 
-    /* hero */
-    .hero{min-height:100vh;display:flex;align-items:center}
-    .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
-    h1{font-size:clamp(2rem,4vw,3.25rem);margin:0 0 12px}
-    p.lead{color:var(--muted);margin:0 0 18px}
+    h1, h2, h3, h4 {
+      font-weight: 600;
+    }
 
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    .preview{height:320px;border-radius:12px;background:linear-gradient(120deg,#062033,#082436);overflow:hidden;position:relative}
+    h1 {
+      color: var(--accent-color);
+    }
 
-    /* sections */
-    section.demo{padding:80px 0}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
-    .demo-card{padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));min-height:160px}
-    .muted{color:var(--muted)}
+    a {
+      color: var(--main-color);
+      text-decoration: none;
+    }
 
-    /* tall content for scroll */
-    .tall{height:200vh}
+    a:hover {
+      text-decoration: underline;
+    }
 
-    /* pinned timeline */
-    .timeline-wrap{display:grid;grid-template-columns:460px 1fr;gap:28px;align-items:start}
-    .timeline{position:relative;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(124,58,237,0.02));min-height:360px}
-    .pin-panel{position:sticky;top:100px}
-    .step{padding:18px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    /* 🌟 HEADER */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
 
-    /* parallax hero layers */
-    .parallax{position:absolute;inset:0;pointer-events:none}
-    .layer{position:absolute;will-change:transform;opacity:0.12}
-    .layer.circle{width:320px;height:320px;border-radius:50%;right:-80px;top:40px;background:radial-gradient(circle,#7c3aed55,#7c3aed22)}
-    .layer.grid{width:420px;height:420px;left:-120px;bottom:-40px;background:repeating-linear-gradient(45deg,rgba(255,255,255,0.02) 0 2px, transparent 2px 8px)}
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 70%);
+      z-index: 1;
+    }
 
-    footer{padding:56px 0;color:var(--muted);text-align:center}
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
 
-    @media (max-width:900px){
-      .hero-inner{grid-template-columns:1fr}
-      .timeline-wrap{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-top: 20px;
+      z-index: 2;
+    }
+
+    .hero h2 {
+      font-size: 1.2rem;
+      color: #eaf4ff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      z-index: 2;
+    }
+
+    /* 📜 SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(60px);
+    }
+
+    section:nth-child(even) {
+      background: var(--bg-light);
+      border-radius: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h3 {
+      color: var(--main-color);
+      border-left: 4px solid var(--main-color);
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    p, li, td {
+      line-height: 1.8;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li strong {
+      color: var(--accent-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    /* ⚙️ SKILLS GRID */
+    .skills-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .skills-column {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .skills-column:hover {
+      transform: translateY(-5px);
+    }
+
+    /* 🦶 FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 10px;
+      background: var(--accent-color);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* ✨ Fade-in Elements */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(40px);
     }
   </style>
 </head>
 <body>
-  <header class="container">
-    <nav>
-      <a href="#info">Info</a>
-      <a href="#projects">Projects</a>
-      <a href="#">Timeline</a>
-    </nav>
-  </header>
 
-  <div class="spacer"></div>
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <img src="pfp.png" alt="Profile Picture" class="profile-pic">
+    <h1>MOAAD EZZAHIR</h1>
+    <h2>COMPUTER ENGINEER</h2>
+  </div>
 
-  <main class="container">
-    <section class="hero" id="info">
-      <div class="hero-inner">
-        <div>
-          <h1>Interactive scrolling with <span style="color:var(--accent)">GSAP ScrollTrigger</span></h1>
-          <p class="lead">A compact demo showing common ScrollTrigger patterns: entrance animations, parallax, pinned timelines, and scrubbed tweens. Built with GSAP (CDN) — drop into any static site.</p>
+  <!-- PROFILE -->
+  <section class="profile" data-animate>
+    <h3>PROFILE</h3>
+    <p style="text-align: center; font-weight: 600; ">5th-year Computer Science student at the International University of Rabat (UIR), specializing in AI and Big Data technologies. Passionate about programming, problem-solving, and exploring new technologies in AI and data science.</p>
 
-          <div class="grid-3">
-            <div class="demo-card card" id="fadeCard">
-              <strong>Fade & Slide</strong>
-              <p class="muted">Elements animate in as they enter the viewport.</p>
-            </div>
-            <div class="demo-card card" id="scaleCard">
-              <strong>Scale</strong>
-              <p class="muted">Scale up on scroll using scrub for smooth interaction.</p>
-            </div>
-            <div class="demo-card card" id="rotateCard">
-              <strong>Rotate</strong>
-              <p class="muted">Rotate image while it scrolls into view.</p>
-            </div>
-          </div>
-        </div>
+  </section>
 
-        <aside class="card preview">
-          <div class="parallax">
-            <div class="layer circle" id="circleLayer"></div>
-            <div class="layer grid" id="gridLayer"></div>
-          </div>
-          <!-- simple visual inside preview -->
-          <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#7c3aed" stop-opacity="0.9" />
-                <stop offset="1" stop-color="#06b6d4" stop-opacity="0.6" />
-              </linearGradient>
-            </defs>
-            <rect x="20" y="40" rx="12" ry="12" width="520" height="240" fill="url(#g1)" opacity="0.14"></rect>
-            <g id="previewShape" transform="translate(80,90)">
-              <circle cx="60" cy="40" r="36" fill="#7c3aed" opacity="0.9"></circle>
-              <rect x="120" y="6" width="220" height="68" rx="10" fill="#06b6d4" opacity="0.9"></rect>
-            </g>
-          </svg>
-        </aside>
+  <!-- CONTACT -->
+  <section class="contact-info" data-animate>
+    <h3>CONTACT</h3>
+    <p><strong>Phone:</strong> +212 637-642196</p>
+    <p><strong>Email:</strong> ezzahirmoaad@gmail.com</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/moaad-ezzahir-49153620a/">linkedin.com/in/moaad-ezzahir</a></p>
+    <p><strong>Github:</strong> <a href="https://github.com/MoaadEZZ">https://github.com/MoaadEZZ</a></p>
+</section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="achievements" data-animate>
+    <h3>ACHIEVEMENTS</h3>
+    <ul>
+      <li><strong>Auto-Request Classification</strong> — Internship Project using Machine Learning for request automation.</li>
+      <li><strong>SmartChess Application</strong> — AI-based interactive chess web app using intelligent agents.</li>
+      <li><strong>Arduino Door Lock</strong> — IoT system with RFID and MQTT dashboard integration.</li>
+      <li><strong>Accountant's Application</strong> — Symfony-based business management tool.</li>
+      <li><strong>Restaurant Application</strong> — JavaFX-based ordering system.</li>
+    </ul>
+  </section>
+
+  <!-- DIPLOMAS -->
+  <section class="diplomas" data-animate>
+    <h3>DIPLOMAS</h3>
+    <table>
+      <tr><td>Computer Engineer Specialized in Big Data</td><td>2025/2026</td></tr>
+      <tr><td>4th Year Computer Science Student, UIR</td><td>2024/2025</td></tr>
+      <tr><td>Baccalaureate: Physics Science</td><td>2021/2022</td></tr>
+    </table>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" data-animate>
+    <h3>TECHNICAL SKILLS</h3>
+    <ul>
+      <li>Problem Solving</li>
+      <li>App Development</li>
+      <li>Big Data Management</li>
+      <li>AI Model Training</li>
+    </ul>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools" data-animate>
+    <h3>TOOLS</h3>
+    <div class="skills-section">
+      <div class="skills-column">
+        <h4>Programming Languages</h4>
+        <p>Java, Python, C, C++, JavaScript, PHP, MATLAB</p>
+        <h4>Frameworks</h4>
+        <p>React, Symfony, Flask, JavaFX, Swing, Android Studio, SpringBoot</p>
       </div>
-    </section>
-
-    <section class="demo" id="projects">
-      <h2>Projects</h2>
-      <p class="muted">Scroll down to see different ScrollTrigger behaviors in action.</p>
-
-      <div style="height:40px"></div>
-
-      <div class="card" style="padding:36px">
-        <div class="tall">
-          <div style="max-width:720px;margin:40px auto">
-            <h3>Parallax & Entrance</h3>
-            <p class="muted">This section contains paragraphs that will fade and slide up into view. The preview to the right provides subtle parallax movement.</p>
-            <p style="margin-top:60vh">Keep scrolling — try resizing your window to see responsive triggers. The purple circle and grid in the preview move with different speeds to create depth.</p>
-          </div>
-        </div>
+      <div class="skills-column">
+        <h4>Databases</h4>
+        <p>SQL, MongoDB, Neo4j</p>
+        <h4>Machine Learning Tools</h4>
+        <p>Neural Networks, CNN, KNN, Regression, Clustering, Computer Vision</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="demo" id="timeline">
-      <h2>Pinned Timeline (scrub)</h2>
-      <div class="timeline-wrap" style="margin-top:18px">
-        <aside class="pin-panel">
-          <div class="timeline card" id="pinTimeline">
-            <h4 style="margin-top:0">Project timeline</h4>
-            <div class="step">Phase 1 — Research</div>
-            <div class="step">Phase 2 — Design</div>
-            <div class="step">Phase 3 — Build</div>
-            <div class="step">Phase 4 — Test & Launch</div>
-          </div>
-        </aside>
+  <!-- LANGUAGES -->
+  <section class="languages" data-animate>
+    <h3>LANGUAGES</h3>
+    <ul>
+      <li>English (Upper Intermediate)</li>
+      <li>French (Advanced)</li>
+      <li>Arabic (Native)</li>
+    </ul>
+  </section>
 
-        <div>
-          <div class="card" style="padding:28px">
-            <p class="muted">As you scroll the right column, the left timeline pins and animates through steps. This is ideal for product roadmaps and storytelling.</p>
-            <div style="height:120vh"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- HOBBIES -->
+  <section class="hobbies" data-animate>
+    <h3>HOBBIES</h3>
+    <ul>
+      <li>Solving math and programming problems</li>
+      <li>Desktop and mobile app development</li>
+      <li>Website development</li>
+      <li>3D modeling with Blender</li>
+      <li>Game development with Unreal Engine</li>
+      <li>Drawing</li>
+    </ul>
+  </section>
 
-  </main>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="container">Made with GSAP • ScrollTrigger — drop-in demo</div>
+    © 2025 MOAAD EZZAHIR — using HTML, CSS, and GSAP
   </footer>
 
-  <!-- GSAP + ScrollTrigger (CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- ⚡ GSAP ANIMATIONS -->
   <script>
-    // Register plugin
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade & slide for demo cards
-    gsap.utils.toArray('.demo-card').forEach((el, i) => {
-      gsap.fromTo(el, {y: 40, autoAlpha: 0}, {
-        y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out',
-        scrollTrigger:{
-          trigger: el,
-          start: 'top 85%',
-          toggleActions:'play none none reverse'
-        }
+    // HERO ANIMATION
+    gsap.from(".profile-pic", {
+      y: -50,
+      opacity: 0,
+      scale: 0.8,
+      duration: 1.2,
+      ease: "power3.out",
+      delay: 0.3
+    });
+
+    gsap.from(".hero h1", {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.6,
+      ease: "power2.out"
+    });
+
+    gsap.from(".hero h2", {
+      y: 20,
+      opacity: 0,
+      duration: 1,
+      delay: 0.9,
+      ease: "power2.out"
+    });
+
+    // SCROLL ANIMATIONS FOR SECTIONS
+    gsap.utils.toArray("[data-animate]").forEach((section) => {
+      gsap.to(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
       });
     });
-
-    // Parallax layers in the preview
-    gsap.to('#circleLayer', {
-      y: -120,
-      rotation: 10,
-      ease: 'none',
-      scrollTrigger: { scrub: 0.8, start: 'top bottom', end: 'bottom top' }
-    });
-    gsap.to('#gridLayer', {
-      y: -40,
-      x: 30,
-      ease: 'none',
-      scrollTrigger: { scrub: 0.6, start: 'top bottom', end: 'bottom top' }
-    });
-
-    // Scale demo
-    gsap.fromTo('#scaleCard', {scale:0.9, autoAlpha:0}, {
-      scale:1, autoAlpha:1, duration:1.2, ease:'power2.out',
-      scrollTrigger:{ trigger:'#scaleCard', start:'top 80%', scrub:0.5 }
-    });
-
-    // Rotate demo
-    gsap.fromTo('#rotateCard', {rotation: -8, x:-20, autoAlpha:0}, {
-      rotation:0, x:0, autoAlpha:1, duration:1, ease:'power3.out',
-      scrollTrigger:{ trigger:'#rotateCard', start:'top 85%' }
-    });
-
-    // Pinning timeline with scrubbed animation
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#pinTimeline',
-        start: 'top 100px',
-        end: () => '+=' + (document.querySelector('#pinTimeline').offsetHeight * 2.4),
-        scrub: 0.8,
-        pin: true,
-        anticipatePin: 1,
-        //markers: true
-      }
-    });
-
-    timeline.fromTo('#pinTimeline .step', {y: 40, autoAlpha: 0}, {y:0, autoAlpha:1, stagger: 0.6, duration: 0.6, ease:'power1.out'});
-
-    // Staggered entrance for paragraphs in the tall demo section
-    gsap.utils.toArray('.tall p').forEach(p => {
-      gsap.from(p, {y: 30, autoAlpha:0, duration:0.9, scrollTrigger:{ trigger: p, start:'top 85%' }});
-    });
-
-    // small responsive retry for ScrollTrigger refresh on resize
-    ScrollTrigger.addEventListener('refreshInit', () => {
-      //console.log('refresh');
-    });
-    ScrollTrigger.refresh();
   </script>
 </body>
 </html>
