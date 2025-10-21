@@ -22,7 +22,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text-color);
       margin: 0;
-      background: linear-gradient(120deg, #f0f4ff, #ffffff);
+      background: linear-gradient(120deg, #dae4ff, #ffffff);  
       overflow-x: hidden;
     }
 
@@ -98,6 +98,10 @@
       transform: translateY(60px);
     }
 
+    .profile{
+      margin-top: 30px;
+    }
+
     section:nth-child(even) {
       background: var(--bg-light);
       border-radius: 30px;
@@ -167,6 +171,44 @@
       font-weight: bold;
     }
 
+    /* ===== Achievements Section ===== */
+      .achievements-container {
+        overflow-x: auto;
+        display: flex;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        scroll-behavior: smooth;
+      }
+
+      .achievement-card {
+        flex: 0 0 auto;
+        border-radius: 15px;
+        padding: 1rem;
+        width: 250px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .achievement-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .achievement-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .achievement-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .achievement-card p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
     /* ✨ Fade-in Elements */
     [data-animate] {
       opacity: 0;
@@ -180,7 +222,9 @@
   <div class="hero">
     <img src="pfp.png" alt="Profile Picture" class="profile-pic">
     <h1>MOAAD EZZAHIR</h1>
-    <h2>COMPUTER ENGINEER</h2>
+    <h2>COMPUTER ENGINEER SPECIALIZED IN BIG DATA & AI</h2>
+    <p><em>"Data is gold - only if you know how to use it"</em></p>
+
   </div>
 
   <!-- PROFILE -->
@@ -202,21 +246,48 @@
   <!-- ACHIEVEMENTS -->
   <section class="achievements" data-animate>
     <h3>ACHIEVEMENTS</h3>
-    <ul>
-      <li><strong>Auto-Request Classification</strong> — Internship Project using Machine Learning for request automation.</li>
-      <li><strong>SmartChess Application</strong> — AI-based interactive chess web app using intelligent agents.</li>
-      <li><strong>Arduino Door Lock</strong> — IoT system with RFID and MQTT dashboard integration.</li>
-      <li><strong>Accountant's Application</strong> — Symfony-based business management tool.</li>
-      <li><strong>Restaurant Application</strong> — JavaFX-based ordering system.</li>
-    </ul>
+    
+    <div class="achievements-container">
+      <div class="achievement-card">
+        <strong>Auto-Request Classification</strong>
+        <p style="font-weight: 300;"><em>Internship Project</em></p>
+        <p>Classification problem solved using Machine learning tools to automaticly handle spam requests.</p>
+        <p><a href="">Click here for more</a></p>
+      </div>
+      <div class="achievement-card">
+        <strong>SmartChess Application</strong>
+        <p style="font-weight: 300;"><em>Academic Project</em></p>
+        <p>AI-based Agent interactive chess web app using intelligent agents.</p>
+        <p><a href="">Click here for more</a></p>
+      </div>
+      <div class="achievement-card">
+        <strong>Arduino Door Lock</strong>
+        <p style="font-weight: 300;"><em>Academic Project</em></p>
+        <p>IoT system with RFID and MQTT dashboard integration.</p>
+        <p><a href="">Click here for more</a></p>
+      </div>
+      <div class="achievement-card">
+        <strong>Accountant's Application</strong>
+        <p style="font-weight: 300;"><em>Internship Project</em></p>
+        <p>Symfony-based business management tool.</p>
+        <p><a href="">Click here for more</a></p>
+      </div>
+      <div class="achievement-card">
+        <strong>Restaurant Application</strong>
+        <p style="font-weight: 300;">Academic Project</p>
+        <p>JavaFX-based ordering system handling restaurant's transactions.</p>
+        <p><a href="">Click here for more</a></p>
+      </div>
+    </div>
+    
   </section>
 
   <!-- DIPLOMAS -->
   <section class="diplomas" data-animate>
     <h3>DIPLOMAS</h3>
     <table>
-      <tr><td>Data Engineer and Data scientist</td><td>2025/2026</td></tr>
-      <tr><td>preparatory classes at UIR</td><td>2022/2024</td></tr>
+      <tr><td>Computer Engineer Specialized in Big Data and Artificial Inteligence at UIR</td><td>2025/2026</td></tr>
+      <tr><td>Integrated Preparatory classes</td><td>2022/2024</td></tr>
       <tr><td>Baccalaureate: Physics Science</td><td>2021/2022</td></tr>
     </table>
   </section>
@@ -276,7 +347,6 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2025 MOAAD EZZAHIR — using HTML, CSS, and GSAP
   </footer>
 
   <!-- ⚡ GSAP ANIMATIONS -->
@@ -302,6 +372,14 @@
     });
 
     gsap.from(".hero h2", {
+      y: 20,
+      opacity: 0,
+      duration: 1,
+      delay: 0.9,
+      ease: "power2.out"
+    });
+
+    gsap.from(".hero p", {
       y: 20,
       opacity: 0,
       duration: 1,
