@@ -1,4 +1,4 @@
-# 🎭 Persona-Style Portfolio — Moaad Ezzahir
+# 🎭 Persona-Style Portfolio - Moaad Ezzahir
 
 > I'm a nerd who likes Persona and decided to make my portfolio like this on a whim.
 
@@ -8,11 +8,11 @@ It combines my interests in **Web Development & UI/UX Design** with my obsession
 
 ## ✨ Features
 
-- **Persona-inspired UI** — Custom menus, transitions, animations, and visual effects.
-- **Dynamic Content** — Fetches GitHub repositories, stars, and languages through the GitHub API.
-- **Immersive Design** — Custom cursor, sound effects, video backgrounds, and animated transitions.
-- **Keyboard Navigation** — Navigate using `↑` `↓`, `Enter`, and `Esc`.
-- **Responsive Layout** — Designed to work across different screen sizes.
+- **Persona-inspired UI** - Custom menus, transitions, animations, and visual effects.
+- **Dynamic Content** - Fetches GitHub repositories, stars, and languages through the GitHub API.
+- **Immersive Design** - Custom cursor, sound effects, video backgrounds, and animated transitions.
+- **Keyboard Navigation** - Navigate using `↑` `↓`, `Enter`, and `Esc`.
+- **Responsive Layout** - Designed to work across different screen sizes.
 
 ## 🛠️ Built With
 
